@@ -1,14 +1,38 @@
-export const hello = async (event, context) => {
-  return {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: `Go Serverless v1.0! ${(await message({ time: 1, copy: 'Your function executed successfully!'}))}`,
-    }),
-  };
-};
+import { Pool } from 'pg';
 
-const message = ({ time, ...rest }) => new Promise((resolve, reject) =>
-  setTimeout(() => {
-    resolve(`${rest.copy} (with a delay)`);
-  }, time * 1000)
-);
+export const hello =  async function(event, context, callback) {
+
+  const pool = new Pool({
+    user: 'postgres',
+    host: 'database-2.cmoyznpl1emx.us-east-1.rds.amazonaws.com',
+    database: 'postgres',
+    password: 'postgres',
+    port: 5432,
+  });
+
+  let rows = null;
+  let error = null;
+  await pool.connect().then(client => {
+    return client.query('SELECT * FROM tenant').then(res => {
+      client.release();
+      rows = res.rows;
+      console.log(res.rows);
+    }).catch(e => {
+      client.release();
+      error = e;
+      console.log(e.stack);
+    });
+  });
+
+  if(!error){
+    //adding a comment
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        rows: rows
+      })
+    };
+  } else {
+    return error.stack;
+  }
+};
