@@ -1,6 +1,11 @@
 import { Pool } from 'pg';
 
-export const hello =  async function(event, context, callback) {
+export const hello =  async function(event, context) {
+
+  console.log("EVENT: ");
+  console.dir(event);
+  console.log("CONTEXT: ");
+  console.dir(context);
 
   const pool = new Pool({
     user: 'postgres',
@@ -12,6 +17,7 @@ export const hello =  async function(event, context, callback) {
 
   let rows = null;
   let error = null;
+
   await pool.connect().then(client => {
     return client.query('SELECT * FROM tenant').then(res => {
       client.release();
@@ -25,7 +31,6 @@ export const hello =  async function(event, context, callback) {
   });
 
   if(!error){
-    //adding a comment
     return {
       statusCode: 200,
       body: JSON.stringify({
