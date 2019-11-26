@@ -6,13 +6,20 @@ package:
   individually: true
 
 plugins:
-  - serverless-bundle-no-pg-native # Package our functions with Webpack
+  - serverless-webpack
   - serverless-offline
   - serverless-dotenv-plugin # Load .env as environment variables
 
+# serverless-webpack configuration
+# Enable auto-packing of external modules
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs12.x
   stage: dev
   region: us-east-1
   # To load environment variables externally
@@ -20,7 +27,8 @@ provider:
   # the following line. Also, make sure to not
   # commit your .env.
   #
-  #environment:
+  environment:
+    NODE_ENV: dev
   #  sampleEnvVar: ${env:SAMPLE_ENV_VAR}
 
 functions:
