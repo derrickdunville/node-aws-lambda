@@ -25,9 +25,7 @@ export const hello =  async function(event, context) {
     console.log("All users:", JSON.stringify(users, null, 4));
     return {
       statusCode: 200,
-      body: JSON.stringify({
-        users: users
-      })
+      body: JSON.stringify(users)
     };
   } catch (error) {
     return {

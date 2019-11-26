@@ -28,7 +28,7 @@ provider:
   # commit your .env.
   #
   environment:
-    NODE_ENV: dev
+    NODE_ENV: production
   #  sampleEnvVar: ${env:SAMPLE_ENV_VAR}
 
 functions:

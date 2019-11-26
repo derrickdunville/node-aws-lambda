@@ -1,5 +1,4 @@
-import { INTEGER, STRING } from 'sequelize';
-const Sequelize = require('sequelize');
+import { Sequelize, INTEGER, STRING } from 'sequelize';
 import { sequelize } from '../db';
 
 export class Tenant extends Sequelize.Model {}
