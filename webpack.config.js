@@ -1,6 +1,6 @@
 const slsw = require('serverless-webpack');
 const nodeExternals = require('webpack-node-externals');
-const path = require('path');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
     entry: slsw.lib.entries,
@@ -12,8 +12,10 @@ module.exports = {
     externals: [nodeExternals()],
     mode: slsw.lib.webpack.isLocal ? 'development' : 'production',
     optimization: {
-        // We no not want to minimize our code.
-        minimize: false,
+        minimize: true,
+        minimizer: [
+            new TerserPlugin({test: /\.js(\?.*)?$/i,}),
+        ]
     },
     performance: {
         // Turn off size warnings for entry points
