@@ -3,21 +3,21 @@ import { sequelize } from '../db';
 
 export class Tenant extends Sequelize.Model {}
 Tenant.init(
-    {
-        // attributes
-        id: {
-            type: INTEGER,
-            primaryKey: true
-        },
-        name: {
-            type: STRING
-            // allowNull defaults to true
-        }
-    }, {
-        //options
-        sequelize,
-        tableName: 'tenant',
-        modelName: 'tenant',
-        timestamps: false
+  {
+    // attributes
+    id: {
+      type: INTEGER,
+      primaryKey: true
+    },
+    name: {
+      type: STRING
+      // allowNull defaults to true
     }
+  }, {
+    // options
+    sequelize,
+    tableName: 'tenant',
+    modelName: 'tenant',
+    timestamps: false
+  }
 );

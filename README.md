@@ -1,8 +1,9 @@
-# Serverless Node.js Starter
+# Serverless Node.js Starter for AWS Lambda
 
-A Serverless starter that adds ES7 syntax, serverless-offline, linting, environment variables, and unit test support. Part of the [Serverless Stack](http://serverless-stack.com) guide.
+This is a Serverless starter that adds ES7 syntax, serverless-offline, linting, environment variables, and unit test support. This project expands on the project provided by [Serverless Stack](http://serverless-stack.com) guide.
+The major differences are the we ripped out the serverless-bundle plugin in favor of serverless-webpack to allow us more control over the webpack configuration. We have also added support for postgres using Sequelize.
 
-[Serverless Node.js Starter](https://github.com/AnomalyInnovations/serverless-nodejs-starter) uses the [serverless-bundle](https://github.com/AnomalyInnovations/serverless-bundle) plugin (an extension of the [serverless-webpack](https://github.com/serverless-heaven/serverless-webpack) plugin) and the [serverless-offline](https://github.com/dherault/serverless-offline) plugin. It supports:
+[Serverless Node.js Starter](https://github.com/AnomalyInnovations/serverless-nodejs-starter) uses the [~~serverless-bundle~~](https://github.com/AnomalyInnovations/serverless-bundle) plugin (an extension of the [serverless-webpack](https://github.com/serverless-heaven/serverless-webpack) plugin) and the [serverless-offline](https://github.com/dherault/serverless-offline) plugin. It supports:
 
 - **Generating optimized Lambda packages with Webpack**
 - **Use ES7 syntax in your handler functions**
@@ -19,35 +20,6 @@ A Serverless starter that adds ES7 syntax, serverless-offline, linting, environm
 - **No need to manage Webpack or Babel configs**
 
 ---
-
-### Demo
-
-A demo version of this service is hosted on AWS - [`https://z6pv80ao4l.execute-api.us-east-1.amazonaws.com/dev/hello`](https://z6pv80ao4l.execute-api.us-east-1.amazonaws.com/dev/hello)
-
-And here is the ES7 source behind it
-
-``` javascript
-export const hello = async (event, context) => {
-  return {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: `Go Serverless v1.0! ${(await message({ time: 1, copy: 'Your function executed successfully!'}))}`,
-      input: event,
-    }),
-  };
-};
-
-const message = ({ time, ...rest }) => new Promise((resolve, reject) =>
-  setTimeout(() => {
-    resolve(`${rest.copy} (with a delay)`);
-  }, time * 1000)
-);
-```
-
-### Upgrading from v1.x
-
-We have detailed instructions on how to upgrade your app to the v2.0 of the starter if you were using v1.x before. [Read about it here](https://github.com/AnomalyInnovations/serverless-nodejs-starter/releases/tag/v2.0).
-
 ### Requirements
 
 - [Install the Serverless Framework](https://serverless.com/framework/docs/providers/aws/guide/installation/)
@@ -58,13 +30,13 @@ We have detailed instructions on how to upgrade your app to the v2.0 of the star
 To create a new Serverless project.
 
 ``` bash
-$ serverless install --url https://github.com/AnomalyInnovations/serverless-nodejs-starter --name my-project
+$ git clone <remote> <my-project>
 ```
 
 Enter the new directory
 
 ``` bash
-$ cd my-project
+$ cd <my-project>
 ```
 
 Install the Node.js packages
@@ -120,23 +92,22 @@ To add environment variables to your project
 
 #### Linting
 
-We use [ESLint](https://eslint.org) to lint your code via the [serverless-bundle](https://github.com/AnomalyInnovations/serverless-bundle) plugin.
+We use [ESLint](https://eslint.org) to lint your code via webpack eslint-loader.
 
-You can turn this off by adding the following to your `serverless.yml`.
+To run the linter locally use 
 
-``` yaml
-custom:
-  bundle:
-    linting: false
+```bash
+$  npm run lint
 ```
 
-To [override the default config](https://eslint.org/docs/user-guide/configuring), add a `.eslintrc.json` file. To ignore ESLint for specific files, add it to a `.eslintignore` file.
+To [override the default config](https://eslint.org/docs/user-guide/configuring), edit the `.eslintrc` file. To ignore ESLint for specific files, add it to a `.eslintignore` file.
 
 ### Support
+
+There is currently no support for this project by me but since this project was originally cloned from [Serverless Node.js Starter](https://github.com/AnomalyInnovations/serverless-nodejs-starter) by AnomalyInnovations you can potentially go back in that direction for support from them.
 
 - Open a [new issue](https://github.com/AnomalyInnovations/serverless-nodejs-starter/issues/new) if you've found a bug or have some suggestions.
 - Or submit a pull request!
 
 ---
 
-This repo is maintained by [Anomaly Innovations](https://anoma.ly); makers of [Seed](https://seed.run) and [Serverless Stack](https://serverless-stack.com).
