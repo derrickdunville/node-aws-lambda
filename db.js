@@ -1,15 +1,17 @@
-// import Sequelize from 'sequelize';
 import { Sequelize } from 'sequelize';
 import pg from 'pg';
 
-export const sequelize = new Sequelize(
-  'postgres',
-  'postgres',
-  'postgres',
+export const db = new Sequelize(
+  process.env.DATABASE,
+  process.env.DATABASE_USERNAME,
+  process.env.DATABASE_PASSWORD,
   {
-    host: 'database-2.cmoyznpl1emx.us-east-1.rds.amazonaws.com',
+    host: process.env.DATABASE_HOST,
     dialect: 'postgres',
-    port: '5432',
-    dialectModule: pg
+    port: process.env.DATABASE_PORT,
+    dialectModule: pg,
+    define: {
+      timestamps: false
+    }
   }
 );

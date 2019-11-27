@@ -29,7 +29,11 @@ provider:
   #
   environment:
     NODE_ENV: production
-  #  sampleEnvVar: ${env:SAMPLE_ENV_VAR}
+    DATABASE: ${env:DATABASE}
+    DATABASE_USERNAME: ${env:DATABASE_USERNAME}
+    DATABASE_PASSWORD: ${env:DATABASE_PASSWORD}
+    DATABASE_HOST: ${env:DATABASE_HOST}
+    DATABASE_PORT: ${env:DATABASE_PORT}
 
 functions:
   hello:

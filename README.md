@@ -102,6 +102,13 @@ $  npm run lint
 
 To [override the default config](https://eslint.org/docs/user-guide/configuring), edit the `.eslintrc` file. To ignore ESLint for specific files, add it to a `.eslintignore` file.
 
+
+#### Sequelize (ORM)
+
+[Sequelize](https://sequelize.org/v5/manual/getting-started.html) is a promise-based Node.js ORM for Postgres, MySQL, MariaDB, SQLite and Microsoft SQL Server. It features solid transaction support, relations, eager and lazy loading, read replication and more.
+
+##### Configuration
+
 ### Support
 
 There is currently no support for this project by me but since this project was originally cloned from [Serverless Node.js Starter](https://github.com/AnomalyInnovations/serverless-nodejs-starter) by AnomalyInnovations you can potentially go back in that direction for support from them.

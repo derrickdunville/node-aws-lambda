@@ -1,7 +1,9 @@
-import { Sequelize, INTEGER, STRING } from 'sequelize';
-import { sequelize } from '../db';
+import {Sequelize, INTEGER, STRING} from 'sequelize';
+import {db} from '../db';
 
-export class Tenant extends Sequelize.Model {}
+export class Tenant extends Sequelize.Model {
+}
+
 Tenant.init(
   {
     // attributes
@@ -10,14 +12,14 @@ Tenant.init(
       primaryKey: true
     },
     name: {
-      type: STRING
-      // allowNull defaults to true
+      type: STRING,
+      //  allowNull defaults to true
+      allowNull: false
     }
   }, {
     // options
-    sequelize,
+    sequelize: db,
     tableName: 'tenant',
-    modelName: 'tenant',
-    timestamps: false
+    modelName: 'tenant'
   }
 );
